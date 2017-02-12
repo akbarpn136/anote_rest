@@ -23,7 +23,7 @@ class Catatan(models.Model):
     )
 
     jenis = models.CharField(max_length=3, choices=OPSI_JENIS, default='LK')
-    kegiatan = models.ForeignKey(Kegiatan, on_delete=models.CASCADE, related_name='nama_kegiatan')
+    kegiatan = models.ForeignKey(Kegiatan, on_delete=models.CASCADE, related_name='catatan_kegiatan')
     nomor = models.CharField(max_length=255)
     referensi = models.CharField(max_length=255)
     tanggal = models.DateField()
