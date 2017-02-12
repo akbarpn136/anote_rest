@@ -10,6 +10,7 @@ class Kegiatan(models.Model):
 
     class Meta:
         verbose_name_plural = 'Kegiatan'
+        ordering = ('-tanggal',)
 
     def __str__(self):
         return '%s: %s' % (self.stkk, self.nama)
@@ -28,5 +29,13 @@ class Catatan(models.Model):
     tanggal = models.DateField()
     butir = models.CharField(max_length=120)
     angka = models.FloatField()
+    isi = models.TextField(default=None)
     dibuat = models.ForeignKey('auth.User', related_name='dibuat_oleh')
     diketahui = models.ForeignKey('auth.User', related_name='diketahui_oleh')
+
+    class Meta:
+        verbose_name_plural = 'Catatan'
+        ordering = ('tanggal',)
+
+    def __str__(self):
+        return self.nomor
