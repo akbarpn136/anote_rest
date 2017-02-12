@@ -118,7 +118,7 @@ STATIC_URL = '/static/'
 
 # Redirect after login success
 # https://docs.djangoproject.com/en/1.10/ref/settings/#login-redirect-url
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/api_1/kegiatan/'
 
 # REST FRAMEWORK
 # http://www.django-rest-framework.org/api-guide
