@@ -5,6 +5,7 @@ from . import models
 
 class KegiatanSerializer(serializers.ModelSerializer):
     catatan_kegiatan = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    anggota_kegiatan = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
 
     class Meta:
         model = models.Kegiatan
@@ -15,6 +16,7 @@ class KegiatanSerializer(serializers.ModelSerializer):
             'kode',
             'tanggal',
             'catatan_kegiatan',
+            'anggota_kegiatan',
         )
 
 
