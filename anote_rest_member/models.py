@@ -14,7 +14,7 @@ class MemberKegiatan(models.Model):
         ('CE', 'Chief Engineering'),
     )
 
-    kegiatan = models.ForeignKey(Kegiatan, related_name='nama_kegiatan', on_delete=models.CASCADE)
+    kegiatan = models.ForeignKey(Kegiatan, related_name='anggota_kegiatan', on_delete=models.CASCADE)
     personil = models.ForeignKey('auth.User', related_name='personil')
     jabatan = models.CharField(max_length=2, choices=OPSI_JABATAN, default='ES')
     kode_jabatan = models.CharField(max_length=10, verbose_name='Kode Jabatan')
