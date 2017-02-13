@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'anote_rest_apl.apps.AnoteRestAplConfig',
     'anote_rest_butir.apps.AnoteRestButirConfig',
+    'anote_rest_member.apps.AnoteRestMemberConfig',
 ]
 
 MIDDLEWARE = [
