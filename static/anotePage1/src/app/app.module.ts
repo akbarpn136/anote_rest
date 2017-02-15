@@ -5,11 +5,15 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
+import { MunculiniDirective } from './an-directive/munculini.directive';
+import { MunculituDirective } from './an-directive/munculitu.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
+    MunculiniDirective,
+    MunculituDirective
   ],
   imports: [
     BrowserModule,
