@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'corsheaders',
     'rest_framework.authtoken',
     'anote_rest_apl.apps.AnoteRestAplConfig',
     'anote_rest_butir.apps.AnoteRestButirConfig',
@@ -45,6 +46,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -121,6 +123,13 @@ STATIC_URL = '/static/'
 # Redirect after login success
 # https://docs.djangoproject.com/en/1.10/ref/settings/#login-redirect-url
 LOGIN_REDIRECT_URL = '/api_1/kegiatan/'
+
+# CORS Setting
+# https://github.com/ottoyiu/django-cors-headers/
+CORS_ORIGIN_WHITELIST = (
+    'localhost:8000',
+    'localhost:4200',
+)
 
 # REST FRAMEWORK
 # http://www.django-rest-framework.org/api-guide
