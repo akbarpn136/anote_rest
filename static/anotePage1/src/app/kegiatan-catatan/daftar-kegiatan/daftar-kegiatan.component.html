@@ -1,4 +1,4 @@
-<h1 class="mb-4">Deretan Kegiatan</h1>
+<button type="button" class="btn btn-info btn-lg btn-block mb-3">Tambah kegiatan</button>
 <div class="list-group">
     <a href="#" class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let kegiatan of DaftarKegiatan">
         <div class="d-flex w-100 justify-content-between">
@@ -13,6 +13,11 @@
 
 <div class="mt-2 clearfix">
     <div class="float-right">
-        <an-pagination></an-pagination>
+        <an-pagination [hasNext]="next !== null"
+                       [hasPrev]="previous !== null"
+                       [total]="total"
+                       [range]="15"
+                       (offset)="onNewOffset($event)">
+        </an-pagination>
     </div>
 </div>
