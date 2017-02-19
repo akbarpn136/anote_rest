@@ -1,14 +1,14 @@
 <nav aria-label="Page navigation">
     <ul class="pagination">
-        <li class="page-item">
-            <a class="page-link" href="#" aria-label="Previous">
+        <li class="page-item" *ngIf="hasPrev" (click)="onPrev($event)">
+            <a href="" class="page-link" aria-label="Previous" title="sebelumnya">
                 <span aria-hidden="true">&laquo;</span>
                 <span class="sr-only">Previous</span>
             </a>
         </li>
 
-        <li class="page-item">
-            <a class="page-link" href="#" aria-label="Next">
+        <li class="page-item" *ngIf="hasNext" (click)="onNext($event)">
+            <a href="" class="page-link" aria-label="Next" title="berikutnya">
                 <span aria-hidden="true">&raquo;</span>
                 <span class="sr-only">Next</span>
             </a>
