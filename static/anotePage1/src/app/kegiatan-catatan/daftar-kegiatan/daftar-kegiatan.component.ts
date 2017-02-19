@@ -11,20 +11,27 @@ export class DaftarKegiatanComponent implements OnInit {
     DaftarKegiatan:any;
     next:any;
     previous:any;
+    total:number;
 
-    constructor(private kegiatanService: KegiatanService) {
-    }
+    private offset:number = 0;
+
+    constructor(private kegiatanService: KegiatanService) {}
 
     ngOnInit() {
-        this.getKegiatan();
+        this.getKegiatan(this.offset);
     }
 
-    getKegiatan() {
-        this.kegiatanService.getKegiatan().subscribe(
+    onNewOffset(number):void {
+        this.getKegiatan(this.offset + number);
+    }
+
+    getKegiatan(offset) {
+        this.kegiatanService.getKegiatan(offset).subscribe(
             (kegiatan) => {
                 this.DaftarKegiatan = kegiatan['results'];
                 this.next = kegiatan['next'];
                 this.previous = kegiatan['previous'];
+                this.total = kegiatan['count'];
             },
             (error) => {console.log(error)}
             );
