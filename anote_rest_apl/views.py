@@ -1,6 +1,11 @@
 from django.shortcuts import get_object_or_404
 from rest_framework import generics
 
+from anote_rest_apl.permissions import (
+    IsSuperUser, HasActivityPermission,
+    IsSuperUserOrAuthenticated, IsOwner
+)
+
 from . import serializers
 from . import models
 
@@ -9,11 +14,13 @@ from . import models
 class DaftarKegiatan(generics.ListCreateAPIView):
     queryset = models.Kegiatan.objects.all()
     serializer_class = serializers.KegiatanSerializer
+    permission_classes = (IsSuperUserOrAuthenticated, )
 
 
 class ModifikasiKegiatan(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.Kegiatan.objects.all()
     serializer_class = serializers.KegiatanSerializer
+    permission_classes = (IsSuperUser,)
 
     def get_object(self):
         q = get_object_or_404(models.Kegiatan, pk=self.kwargs['kegiatan_id'])
@@ -24,16 +31,39 @@ class ModifikasiKegiatan(generics.RetrieveUpdateDestroyAPIView):
 class DaftarCatatan(generics.ListCreateAPIView):
     queryset = models.Catatan.objects.all()
     serializer_class = serializers.CatatanSerializer
+    permission_classes = (HasActivityPermission,)
+    izin_kegiatan = {}
+
+    def dispatch(self, request, *args, **kwargs):
+        self.izin_kegiatan['GET'] = kwargs['kegiatan_id']
+        self.izin_kegiatan['POST'] = kwargs['kegiatan_id']
+
+        return super(DaftarCatatan, self).dispatch(request, *args, **kwargs)
 
     def get_queryset(self):
         q = models.Catatan.objects.filter(kegiatan=self.kwargs['kegiatan_id'])
 
         return q
 
+    def perform_create(self, serializer):
+        keg = get_object_or_404(models.Kegiatan, pk=self.kwargs['kegiatan_id'])
+
+        serializer.save(dibuat=self.request.user, kegiatan=keg)
+
 
 class ModifikasiCatatan(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.Catatan.objects.all()
     serializer_class = serializers.CatatanSerializer
+    permission_classes = (HasActivityPermission, IsOwner, )
+    izin_kegiatan = {}
+
+    def dispatch(self, request, *args, **kwargs):
+        self.izin_kegiatan['GET'] = kwargs['kegiatan_id']
+        self.izin_kegiatan['POST'] = kwargs['kegiatan_id']
+        self.izin_kegiatan['PUT'] = kwargs['kegiatan_id']
+        self.izin_kegiatan['DELETE'] = kwargs['kegiatan_id']
+
+        return super(ModifikasiCatatan, self).dispatch(request, *args, **kwargs)
 
     def get_queryset(self):
         q = models.Catatan.objects.filter(kegiatan=self.kwargs['kegiatan_id'])
@@ -42,7 +72,10 @@ class ModifikasiCatatan(generics.RetrieveUpdateDestroyAPIView):
 
     def get_object(self):
         q = get_object_or_404(models.Catatan,
-                              kegiatan=self.get_queryset(),
+                              kegiatan=self.kwargs['kegiatan_id'],
                               pk=self.kwargs['catatan_id'])
 
         return q
+
+    def perform_update(self, serializer):
+        serializer.save(dibuat=self.request.user)
