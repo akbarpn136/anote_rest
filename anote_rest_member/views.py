@@ -3,7 +3,7 @@ from rest_framework import generics
 
 from . import models
 from . import serializers
-from anote_rest_butir.views import IsSuperUser
+from anote_rest_apl.permissions import IsSuperUser
 from anote_rest_apl.models import Kegiatan
 
 
