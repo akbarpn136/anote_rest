@@ -2,23 +2,16 @@ from django.shortcuts import get_object_or_404
 from rest_framework import generics
 from rest_framework import permissions
 
+from anote_rest_apl.permissions import IsSuperUser
 from . import models
 from . import serializers
 
 
 # Create your views here.
-class IsSuperUser(permissions.BasePermission):
-    def has_permission(self, request, view):
-        if request.user.is_superuser:
-            return True
-        else:
-            return False
-
-
 class DaftarButirKerekayasaan(generics.ListCreateAPIView):
     queryset = models.ButirKerekayasaan.objects.all()
     serializer_class = serializers.ButirSerializer
-    permission_classes = (IsSuperUser, )
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
 
 class ModifikasiButirKerekayasaan(generics.RetrieveUpdateDestroyAPIView):
