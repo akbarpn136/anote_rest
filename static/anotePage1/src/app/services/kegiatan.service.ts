@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Http, Response, Headers, RequestOptions} from '@angular/http';
+import {Http, Response, Headers, RequestOptions, URLSearchParams} from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
@@ -10,14 +10,18 @@ export class KegiatanService {
     constructor(private http: Http) {
     }
 
-    getKegiatan() {
+    getKegiatan(offset) {
         let headers = new Headers({'Content-Type': 'application/json'});
-        let options = new RequestOptions({headers: headers});
+        let params = new URLSearchParams();
+
+        // params.set('limit', limit);
+        params.set('offset', offset);
+
+        let options = new RequestOptions({headers: headers, search: params});
 
         return this.http.get(this.KEGIATAN_URL, options)
             .map((res: Response) => {
-                let body = res.json();
-                return body;
+                return res.json();
             })
             .catch((err: Response | any) => {
                 if (err instanceof Response) {
