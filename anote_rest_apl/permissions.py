@@ -12,18 +12,16 @@ class IsSuperUser(permissions.BasePermission):
             return False
 
 
-class IsSuperUserOrAuthenticated(permissions.BasePermission):
+class IsSuperUserOrReadonly(permissions.BasePermission):
     def has_permission(self, request, view):
         if request.user.is_superuser:
             if request.method == 'GET' or request.method == 'POST':
                 return True
-        elif request.user.is_authenticated:
+        else:
             if request.method == 'GET':
                 return True
             else:
                 return False
-        else:
-            return False
 
 
 class HasActivityPermission(permissions.BasePermission):

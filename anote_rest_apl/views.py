@@ -3,7 +3,7 @@ from rest_framework import generics
 
 from anote_rest_apl.permissions import (
     IsSuperUser, HasActivityPermission,
-    IsSuperUserOrAuthenticated, IsOwner
+    IsSuperUserOrReadonly, IsOwner
 )
 
 from . import serializers
@@ -14,7 +14,7 @@ from . import models
 class DaftarKegiatan(generics.ListCreateAPIView):
     queryset = models.Kegiatan.objects.all()
     serializer_class = serializers.KegiatanSerializer
-    permission_classes = (IsSuperUserOrAuthenticated, )
+    permission_classes = (IsSuperUserOrReadonly, )
 
 
 class ModifikasiKegiatan(generics.RetrieveUpdateDestroyAPIView):
