@@ -26,7 +26,7 @@ export class DaftarKegiatanComponent implements OnInit {
     }
 
     getKegiatan(offset) {
-        this.kegiatanService.getKegiatan(offset).subscribe(
+        return this.kegiatanService.getKegiatan(offset).subscribe(
             (kegiatan) => {
                 this.DaftarKegiatan = kegiatan['results'];
                 this.next = kegiatan['next'];
