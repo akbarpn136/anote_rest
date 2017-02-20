@@ -19,6 +19,10 @@ export class HeaderComponent implements OnInit {
         e.preventDefault();
     }
 
+    onMouseDropdownClicked(e):void {
+        e.preventDefault();
+    }
+
     onStatusClicked(status) {
         this.status = status;
     }
