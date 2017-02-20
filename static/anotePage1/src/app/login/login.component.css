@@ -1,0 +1,26 @@
+body, html {
+    height: 100% !important;
+}
+
+.jumbotron {
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#eceeef+54,ffffff+100&1+54,0+100 */
+    background: -moz-linear-gradient(top, rgba(236, 238, 239, 1) 54%, rgba(255, 255, 255, 0) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgba(236, 238, 239, 1) 54%, rgba(255, 255, 255, 0) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, rgba(236, 238, 239, 1) 54%, rgba(255, 255, 255, 0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eceeef', endColorstr='#00ffffff', GradientType=0); /* IE6-9 */
+}
+
+.form-signin {
+    max-width: 330px;
+}
+
+.form-signin input[type="text"] {
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.form-signin input[type="password"] {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
