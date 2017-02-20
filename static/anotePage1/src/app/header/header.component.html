@@ -3,23 +3,28 @@
             anMunculitu (status)="onStatusClicked($event)">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand" href="">{{ logo }}</a>
+    <span class="navbar-brand">{{ logo }}</span>
     <div class="collapse navbar-collapse" anMunculitu [isVisible]="status">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href=""><i class="mdi mdi-desktop-mac mr-1"></i>Kegiatan</a>
+                <a class="nav-link"
+                   [routerLink]="['']"
+                   routerLinkActive="active"
+                   [routerLinkActiveOptions]="{exact:true}"><i class="mdi mdi-desktop-mac mr-1"></i>Kegiatan</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href=""><i class="mdi mdi-book-multiple mr-1"></i>Laporan</a>
             </li>
             <li class="nav-item dropdown" anMunculini (click)="onMouseClicked($event)">
-                <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink"
+                <a class="nav-link dropdown-toggle" href=""
+                   (click)="onMouseDropdownClicked($event)"
+                   id="navbarDropdownMenuLink"
                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="mdi mdi-settings mr-1"></i>Pengaturan
                 </a>
                 <div class="dropdown-menu dropdown-menu-right mt-0" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href=""><i class="mdi mdi-account-box-outline mr-2"></i>Profil</a>
-                    <a class="dropdown-item" href=""><i class="mdi mdi-login-variant mr-2"></i>Masuk</a>
+                    <a class="dropdown-item" [routerLink]="['masuk']" routerLinkActive="active"><i class="mdi mdi-login-variant mr-2"></i>Masuk</a>
                 </div>
             </li>
         </ul>
