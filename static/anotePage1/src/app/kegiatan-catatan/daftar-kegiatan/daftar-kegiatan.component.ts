@@ -8,20 +8,21 @@ import {KegiatanService} from "../../services/kegiatan.service";
     styleUrls: ['./daftar-kegiatan.component.css']
 })
 export class DaftarKegiatanComponent implements OnInit {
-    DaftarKegiatan:any;
-    next:any;
-    previous:any;
-    total:number;
+    DaftarKegiatan: any;
+    next: any;
+    previous: any;
+    total: number;
 
-    private offset:number = 0;
+    private offset: number = 0;
 
-    constructor(private kegiatanService: KegiatanService) {}
+    constructor(private kegiatanService: KegiatanService) {
+    }
 
     ngOnInit() {
         this.getKegiatan(this.offset);
     }
 
-    onNewOffset(number):void {
+    onNewOffset(number): void {
         this.getKegiatan(this.offset + number);
     }
 
@@ -33,8 +34,14 @@ export class DaftarKegiatanComponent implements OnInit {
                 this.previous = kegiatan['previous'];
                 this.total = kegiatan['count'];
             },
-            (error) => {console.log(error)}
-            );
+            (error) => {
+                console.log(error)
+            }
+        );
     }
 
+    onKegiatanClicked(event): void {
+        event.preventDefault();
+        alert('clicked');
+    }
 }
