@@ -1,13 +1,33 @@
 <div class="jumbotron jumbotron-fluid">
     <div class="container">
-        <form class="form-signin mx-auto" novalidate>
-            <h2 class="form-signin-heading">Silahkan masuk</h2>
-            <label for="inputUsername" class="sr-only">Username</label>
-            <input type="text" id="inputUsername" class="form-control" placeholder="Username" autofocus="">
-            <label for="inputPassword" class="sr-only">Password</label>
-            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
+        <form class="form-signin mx-auto" novalidate #authForm="ngForm" (submit)="onAuthSubmit()">
+            <h2 class="form-signin-heading">Otentikasi</h2>
 
-            <button class="btn btn-lg btn-primary btn-block mt-4" type="submit">Masuk</button>
+            <div class="alert alert-danger" role="alert" *ngIf="warnStat">
+                <strong>Oops!</strong> {{ message }}
+            </div>
+
+            <div class="form-group mb-0"
+                 [ngClass]="{'has-success': u.valid, 'has-danger': u.invalid && u.dirty}">
+                <label for="inputUsername" class="sr-only">Username</label>
+                <input type="text" id="inputUsername" class="form-control" placeholder="Username" required=""
+                       #u="ngModel"
+                       name="username"
+                       [(ngModel)]="username"
+                       [ngClass]="{'form-control-success': u.valid, 'form-control-danger': u.invalid && u.dirty}">
+            </div>
+
+            <div class="form-group"
+                 [ngClass]="{'has-success': p.valid, 'has-danger': p.invalid && p.dirty}">
+                <label for="inputPassword" class="sr-only">Password</label>
+                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required=""
+                       #p="ngModel"
+                       name="password"
+                       [(ngModel)]="password"
+                       [ngClass]="{'form-control-success': p.valid, 'form-control-danger': p.invalid && p.dirty}">
+            </div>
+
+            <button class="btn btn-lg btn-primary btn-block mt-4" type="submit" [disabled]="!authForm.form.valid">Masuk</button>
         </form>
     </div>
 </div>
