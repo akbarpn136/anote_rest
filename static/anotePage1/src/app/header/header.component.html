@@ -23,8 +23,9 @@
                     <i class="mdi mdi-settings mr-1"></i>Pengaturan
                 </a>
                 <div class="dropdown-menu dropdown-menu-right mt-0" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href=""><i class="mdi mdi-account-box-outline mr-2"></i>Profil</a>
-                    <a class="dropdown-item" [routerLink]="['masuk']" routerLinkActive="active"><i class="mdi mdi-login-variant mr-2"></i>Masuk</a>
+                    <a class="dropdown-item" href="" *ngIf="isAuth"><i class="mdi mdi-account-box-outline mr-2"></i>Profil</a>
+                    <a class="dropdown-item" href="" *ngIf="isAuth" (click)="onLogoutClick($event)"><i class="mdi mdi-logout-variant mr-2"></i>Keluar</a>
+                    <a class="dropdown-item" *ngIf="!isAuth" [routerLink]="['masuk']" routerLinkActive="active"><i class="mdi mdi-login-variant mr-2"></i>Masuk</a>
                 </div>
             </li>
         </ul>
