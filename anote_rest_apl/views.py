@@ -1,5 +1,8 @@
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
+from django.views.generic import ListView
 from rest_framework import generics
+from rest_framework.authtoken.models import Token
 
 from anote_rest_apl.permissions import (
     IsSuperUser, HasActivityPermission,
@@ -79,3 +82,20 @@ class ModifikasiCatatan(generics.RetrieveUpdateDestroyAPIView):
 
     def perform_update(self, serializer):
         serializer.save(dibuat=self.request.user)
+
+
+class CheckToken(ListView):
+    model = Token
+
+    def get_queryset(self):
+        token = Token.objects.filter(key=self.kwargs['token'])
+
+        return token
+
+    def get(self, request, *args, **kwargs):
+        isExist = self.get_queryset().exists()
+        stat = {
+            'exist': isExist
+        }
+
+        return JsonResponse(data=stat, safe=False)
