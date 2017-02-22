@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthorizeService} from "../services/authorize.service";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'an-login',
     templateUrl: './login.component.html',
-    styleUrls: ['./login.component.css'],
-    providers: [AuthorizeService]
+    styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
     username: string;
@@ -13,7 +13,8 @@ export class LoginComponent implements OnInit {
     warnStat: boolean = false;
     message: string = 'Username/password salah...';
 
-    constructor(private auth: AuthorizeService) {
+    constructor(private auth: AuthorizeService,
+                private router: Router) {
     }
 
     ngOnInit() {
@@ -24,6 +25,8 @@ export class LoginComponent implements OnInit {
             (data) => {
                 if (data.hasOwnProperty('token')) {
                     this.warnStat = false;
+                    //noinspection JSIgnoredPromiseFromCall
+                    this.router.navigate(['']);
                 }
 
                 else {
