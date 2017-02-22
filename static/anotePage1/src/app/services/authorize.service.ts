@@ -40,4 +40,8 @@ export class AuthorizeService {
                 }
             });
     }
+
+    cobaLogout():void {
+        localStorage.removeItem('qwerty');
+    }
 }
