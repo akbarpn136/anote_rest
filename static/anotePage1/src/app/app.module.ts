@@ -14,6 +14,8 @@ import {PaginationComponent} from './pagination/pagination.component';
 import {route} from './app.route';
 import { LoginComponent } from './login/login.component';
 
+import {GuardAuthorizeService} from "./services/guard-authorize.service";
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -32,7 +34,7 @@ import { LoginComponent } from './login/login.component';
         HttpModule,
         route
     ],
-    providers: [],
+    providers: [GuardAuthorizeService],
     bootstrap: [AppComponent]
 })
 export class AppModule {
