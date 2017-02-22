@@ -1,4 +1,7 @@
 import {Component, OnInit} from '@angular/core';
+import {GuardAuthorizeService} from "../services/guard-authorize.service";
+import {AuthorizeService} from "../services/authorize.service";
+import {Router, NavigationEnd} from "@angular/router";
 
 @Component({
     selector: 'an-header',
@@ -6,20 +9,30 @@ import {Component, OnInit} from '@angular/core';
     styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-    logo:string = 'aNote';
-    status:boolean;
+    logo: string = 'aNote';
+    status: boolean;
+    isAuth: boolean = false;
 
-    constructor() {
+    constructor(private guard: GuardAuthorizeService,
+                private auth: AuthorizeService,
+                private router: Router) {
+        this.router.events.subscribe((val) => {
+            if (val instanceof NavigationEnd) {
+                if (!this.guard.canActivate()) {
+                    this.isAuth = true;
+                }
+            }
+        });
     }
 
     ngOnInit() {
     }
 
-    onMouseClicked(e):void {
+    onMouseClicked(e): void {
         e.preventDefault();
     }
 
-    onMouseDropdownClicked(e):void {
+    onMouseDropdownClicked(e): void {
         e.preventDefault();
     }
 
@@ -27,4 +40,12 @@ export class HeaderComponent implements OnInit {
         this.status = status;
     }
 
+    onLogoutClick(event): void {
+        this.auth.cobaLogout();
+        this.isAuth = false;
+        //noinspection JSIgnoredPromiseFromCall
+        this.router.navigate(['']);
+
+        event.preventDefault();
+    }
 }
