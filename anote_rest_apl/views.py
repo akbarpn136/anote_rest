@@ -23,7 +23,7 @@ class DaftarKegiatan(generics.ListCreateAPIView):
 class ModifikasiKegiatan(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.Kegiatan.objects.all()
     serializer_class = serializers.KegiatanSerializer
-    permission_classes = (IsSuperUser,)
+    permission_classes = (IsSuperUserOrReadonly,)
 
     def get_object(self):
         q = get_object_or_404(models.Kegiatan, pk=self.kwargs['kegiatan_id'])
