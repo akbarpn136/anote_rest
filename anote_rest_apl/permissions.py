@@ -15,8 +15,7 @@ class IsSuperUser(permissions.BasePermission):
 class IsSuperUserOrReadonly(permissions.BasePermission):
     def has_permission(self, request, view):
         if request.user.is_superuser:
-            if request.method == 'GET' or request.method == 'POST':
-                return True
+            return True
         else:
             if request.method == 'GET':
                 return True
