@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
 
 @Component({
     selector: 'an-daftar-catatan',
@@ -8,6 +8,7 @@ import {Component, OnInit} from '@angular/core';
 export class DaftarCatatanComponent implements OnInit {
     headerText:string;
     deskripsi:string;
+    @Input() kegiatan_terpilih:any;
 
     constructor() {}
 
