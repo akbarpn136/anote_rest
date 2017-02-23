@@ -1,12 +1,28 @@
 <div class="card card-outline-secondary">
-    <div class="card-header">
-        {{ headerText }}
+    <div class="card-header clearfix">
+        <div class="float-left">
+            <span *ngIf="!kegiatan_terpilih?.id">{{ headerText }}</span>
+            {{ kegiatan_terpilih?.nama }}
+        </div>
+        <div class="float-right dropdown show" *ngIf="kegiatan_terpilih?.id" anMunculini>
+            <button type="button" class="btn btn-outline-secondary btn-sm"><i class="mdi mdi-dots-vertical"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right mt-0" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">Ubah</a>
+                <a class="dropdown-item" href="#">Anggota</a>
+                <a class="dropdown-item" href="#">Format</a>
+            </div>
+        </div>
     </div>
     <div class="card-block">
         <blockquote class="card-blockquote">
-            <p>
+            <p *ngIf="!kegiatan_terpilih?.id">
                 {{ deskripsi }}
             </p>
+            <ul *ngIf="kegiatan_terpilih?.id">
+                <li>Kode: {{ kegiatan_terpilih?.kode }}</li>
+                <li>STKK: {{ kegiatan_terpilih?.stkk }}</li>
+            </ul>
         </blockquote>
     </div>
 </div>
