@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 
 import {KegiatanService} from "../../services/kegiatan.service";
+import {KegiatanTertentuService} from "../../services/kegiatan-tertentu.service";
 
 @Component({
     selector: 'an-daftar-kegiatan',
@@ -9,13 +10,15 @@ import {KegiatanService} from "../../services/kegiatan.service";
 })
 export class DaftarKegiatanComponent implements OnInit {
     DaftarKegiatan: any;
+    @Output() kegiatan:any = new EventEmitter<any>();
     next: any;
     previous: any;
     total: number;
 
     private offset: number = 0;
 
-    constructor(private kegiatanService: KegiatanService) {
+    constructor(private kegiatanService: KegiatanService,
+                private kegiatanTertentu:KegiatanTertentuService) {
     }
 
     ngOnInit() {
@@ -33,6 +36,7 @@ export class DaftarKegiatanComponent implements OnInit {
                 this.next = kegiatan['next'];
                 this.previous = kegiatan['previous'];
                 this.total = kegiatan['count'];
+                // this.prog.done();
             },
             (error) => {
                 console.log(error)
@@ -40,8 +44,15 @@ export class DaftarKegiatanComponent implements OnInit {
         );
     }
 
-    onKegiatanClicked(event): void {
+    onKegiatanClicked(event, id): void {
         event.preventDefault();
-        alert('clicked');
+        this.kegiatanTertentu.getKegiatanTertentu(id).subscribe(
+            (kegiatan) => {
+                this.kegiatan.emit(kegiatan);
+            },
+            (err) => {
+                console.log(err);
+            }
+        );
     }
 }
