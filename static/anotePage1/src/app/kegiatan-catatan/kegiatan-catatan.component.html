@@ -2,11 +2,11 @@
     <div class="row">
         <div class="col-md-9 push-md-3">
             <router-outlet></router-outlet>
-            <an-daftar-catatan [kegiatan_terpilih]="kegiatan_terpilih"></an-daftar-catatan>
         </div>
 
         <div class="col-md-3 pull-md-9">
-            <an-daftar-kegiatan (kegiatan)="onKegiatan($event)"></an-daftar-kegiatan>
+            <an-daftar-kegiatan (kegiatan)="onKegiatan($event)"
+                                (catatan_terkait)="onCatatanTerkait($event)"></an-daftar-kegiatan>
         </div>
     </div>
 </div>
