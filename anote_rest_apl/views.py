@@ -6,7 +6,7 @@ from rest_framework import generics
 from rest_framework.authtoken.models import Token
 
 from anote_rest_apl.permissions import (
-    IsSuperUser, HasActivityPermission,
+    HasActivityPermission,
     IsSuperUserOrReadonly, IsOwner
 )
 
@@ -19,6 +19,15 @@ class DaftarKegiatan(generics.ListCreateAPIView):
     queryset = models.Kegiatan.objects.all()
     serializer_class = serializers.KegiatanSerializer
     permission_classes = (IsSuperUserOrReadonly, )
+
+    def get_queryset(self):
+        if not self.request.user.is_authenticated or self.request.user.is_superuser:
+            q = models.Kegiatan.objects.all()
+
+        else:
+            q = models.Kegiatan.objects.filter(anggota_kegiatan=self.request.user.pk)
+
+        return q
 
 
 class ModifikasiKegiatan(generics.RetrieveUpdateDestroyAPIView):
