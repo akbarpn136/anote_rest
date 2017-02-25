@@ -1,6 +1,6 @@
 <button type="button" class="btn btn-info btn-lg btn-block mb-3 white-spacing">Tambah kegiatan</button>
 <div class="list-group">
-    <a href="" class="list-group-item list-group-item-action flex-column align-items-start"
+    <a [routerLink]="['kegiatan', kegiatan.id]" routerLinkActive="active" class="list-group-item list-group-item-action flex-column align-items-start"
        *ngFor="let kegiatan of DaftarKegiatan" (click)="onKegiatanClicked($event, kegiatan.id)">
         <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1">{{ kegiatan.nama }}</h5>
