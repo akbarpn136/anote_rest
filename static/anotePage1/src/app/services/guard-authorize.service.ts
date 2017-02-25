@@ -2,13 +2,13 @@ import {Injectable} from '@angular/core';
 import {Http, RequestOptions, Headers, Response} from "@angular/http";
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-import {CanActivate, Router} from "@angular/router";
+import {CanActivate} from "@angular/router";
 
 @Injectable()
 export class GuardAuthorizeService implements CanActivate {
     private CHECK_TOKEN_URL = 'http://127.0.0.1:8000/api_1/kegiatan/token-check/';
 
-    constructor(private http: Http, private router: Router) {
+    constructor(private http: Http) {
     }
 
     canActivate() {
@@ -16,14 +16,7 @@ export class GuardAuthorizeService implements CanActivate {
 
         if (qwerty) {
             this.checkKeyValid(qwerty).subscribe((exist) => {
-                if (exist['exist']) {
-                    //noinspection JSIgnoredPromiseFromCall
-                    this.router.navigate(['']);
-                    return false;
-                }
-                else {
-                    return true;
-                }
+                return !exist['exist'];
             });
         }
 
