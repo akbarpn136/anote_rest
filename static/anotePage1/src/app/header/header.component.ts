@@ -1,5 +1,4 @@
-import {Component, OnInit} from '@angular/core';
-import {GuardAuthorizeService} from "../services/guard-authorize.service";
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {AuthorizeService} from "../services/authorize.service";
 import {Router, NavigationEnd} from "@angular/router";
 
@@ -8,24 +7,30 @@ import {Router, NavigationEnd} from "@angular/router";
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
-    logo: string = 'aNote';
+export class HeaderComponent implements OnInit, OnDestroy {
+    logo: string;
     status: boolean;
     isAuth: boolean = false;
+    isShow: boolean;
+    name: string;
+    private sub:any;
 
-    constructor(private guard: GuardAuthorizeService,
-                private auth: AuthorizeService,
+    constructor(private auth: AuthorizeService,
                 private router: Router) {
-        this.router.events.subscribe((val) => {
+        this.sub = this.router.events.subscribe((val) => {
             if (val instanceof NavigationEnd) {
-                if (!this.guard.canActivate()) {
-                    this.isAuth = true;
-                }
+                if (localStorage.getItem('qwerty')) {this.isAuth = true; this.name = localStorage.getItem('user')}
+                else {this.name = 'Pengaturan'}
             }
         });
     }
 
     ngOnInit() {
+        this.logo = 'aNote';
+    }
+
+    ngOnDestroy() {
+        this.sub.unsubscribe();
     }
 
     onMouseClicked(e): void {
@@ -43,8 +48,9 @@ export class HeaderComponent implements OnInit {
     onLogoutClick(event): void {
         this.auth.cobaLogout();
         this.isAuth = false;
+        this.isShow = false;
         //noinspection JSIgnoredPromiseFromCall
-        this.router.navigate(['']);
+        this.router.navigate(['kegiatan']);
 
         event.preventDefault();
     }
