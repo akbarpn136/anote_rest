@@ -1,10 +1,9 @@
-<div class="card card-outline-secondary">
+<div class="card card-outline-secondary mb-3">
     <div class="card-header clearfix">
         <div class="float-left">
-            <span *ngIf="!kegiatan_terpilih?.id">{{ headerText }}</span>
             {{ kegiatan_terpilih?.nama }}
         </div>
-        <div class="float-right dropdown show" *ngIf="kegiatan_terpilih?.id" anMunculini>
+        <div class="float-right dropdown show" anMunculini>
             <button type="button" class="btn btn-outline-secondary btn-sm"><i class="mdi mdi-dots-vertical"></i>
             </button>
             <div class="dropdown-menu dropdown-menu-right mt-0" aria-labelledby="dropdownMenuButton">
@@ -16,13 +15,43 @@
     </div>
     <div class="card-block">
         <blockquote class="card-blockquote">
-            <p *ngIf="!kegiatan_terpilih?.id">
+            <p>
                 {{ deskripsi }}
             </p>
-            <ul *ngIf="kegiatan_terpilih?.id">
+            <ul>
                 <li>Kode: {{ kegiatan_terpilih?.kode }}</li>
                 <li>STKK: {{ kegiatan_terpilih?.stkk }}</li>
             </ul>
         </blockquote>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4 mb-3" *ngFor="let catatan of catatan_terkait">
+        <div class="card p-3 h-100">
+            <blockquote class="card-block card-blockquote h-100">
+                <p style="word-break: break-all;">
+                    Catatan {{ catatan?.nomor }}
+                </p>
+                <footer class="clearfix">
+                    <small class="text-muted float-left">
+                        Dibuat: <cite title="Source Title">{{ catatan?.tanggal | date:"dd MMM, y" }}</cite>
+                    </small>
+
+                    <a href="" class="float-right">Lihat</a>
+                </footer>
+            </blockquote>
+        </div>
+    </div>
+</div>
+
+<div class="row" *ngIf="catatan_total > 0">
+    <div class="col-md-12">
+        <an-pagination [hasNext]="catatan_next !== null"
+                       [hasPrev]="catatan_previous !== null"
+                       [total]="catatan_total"
+                       [range]="15"
+                       (offset)="onNewOffset(kegiatan_id, $event)">
+        </an-pagination>
     </div>
 </div>
