@@ -27,6 +27,8 @@ export class AuthorizeService {
                 let body = res.json();
 
                 localStorage.setItem('qwerty', body['token']);
+                localStorage.setItem('user', body['name']);
+
                 return body;
             })
             .catch((err: Response | any) => {
@@ -41,7 +43,7 @@ export class AuthorizeService {
             });
     }
 
-    cobaLogout():void {
+    cobaLogout(): void {
         localStorage.removeItem('qwerty');
         localStorage.removeItem('user');
     }
