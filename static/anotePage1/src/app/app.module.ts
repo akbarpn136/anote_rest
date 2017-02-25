@@ -15,6 +15,7 @@ import {route} from './app.route';
 import { LoginComponent } from './login/login.component';
 
 import {GuardAuthorizeService} from "./services/guard-authorize.service";
+import { CatatanComponent } from './kegiatan-catatan/daftar-catatan/catatan.component';
 
 @NgModule({
     declarations: [
@@ -26,7 +27,8 @@ import {GuardAuthorizeService} from "./services/guard-authorize.service";
         DaftarKegiatanComponent,
         DaftarCatatanComponent,
         PaginationComponent,
-        LoginComponent
+        LoginComponent,
+        CatatanComponent
     ],
     imports: [
         BrowserModule,
