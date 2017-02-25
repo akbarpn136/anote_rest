@@ -57,7 +57,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.isShow = false;
 
         //noinspection JSIgnoredPromiseFromCall
-        this.router.navigate(['kegiatan']);
+        this.router.navigate(['']);
 
         event.preventDefault();
     }
