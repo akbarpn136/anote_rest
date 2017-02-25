@@ -1,7 +1,7 @@
 <div class="jumbotron jumbotron-fluid mb-5">
     <div class="container">
         <form class="form-signin mx-auto" novalidate #authForm="ngForm" (submit)="onAuthSubmit()">
-            <h2 class="form-signin-heading">Otentikasi</h2>
+            <h2 class="form-signin-heading text-center">Otentikasi</h2>
 
             <div class="alert alert-danger" role="alert" *ngIf="warnStat">
                 <strong>Oops!</strong> {{ message }}
