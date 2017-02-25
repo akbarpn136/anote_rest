@@ -1,0 +1,42 @@
+import { Injectable } from '@angular/core';
+import {Http, Headers, URLSearchParams, RequestOptions, Response} from "@angular/http";
+import {GuardAuthorizeService} from "./guard-authorize.service";
+
+@Injectable()
+export class CatatanKegiatanService {
+    private KEGIATAN_URL: string = 'http://127.0.0.1:8000/api_1/kegiatan/';
+    private qwerty:string;
+
+    constructor(private http: Http, private guard:GuardAuthorizeService) {
+        if (!this.guard.canActivate()) {
+            this.qwerty = localStorage.getItem('qwerty');
+        }
+
+        else {
+            this.qwerty = '';
+        }
+    }
+
+    getCatatan(kegiatan_id, offset) {
+        let headers = new Headers({'Content-Type': 'application/json', 'Authorization': `token ${this.qwerty}`});
+        let params = new URLSearchParams();
+
+        // params.set('limit', limit);
+        params.set('offset', offset);
+
+        let options = new RequestOptions({headers: headers, search: params});
+
+        return this.http.get(`${this.KEGIATAN_URL}${kegiatan_id}/catatan/`, options)
+            .map((res: Response) => {
+                return res.json();
+            })
+            .catch((err: Response | any) => {
+                if (err instanceof Response) {
+                    return err.json();
+                }
+                else {
+                    return err.message;
+                }
+            });
+    }
+}
