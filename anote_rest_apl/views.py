@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView
@@ -94,8 +95,16 @@ class CheckToken(ListView):
 
     def get(self, request, *args, **kwargs):
         isExist = self.get_queryset().exists()
+        name = self.get_queryset().values_list('user', flat=True)
+
+        if isExist:
+            name = User.objects.get(pk=name[0]).get_full_name()
+        else:
+            name = 'Anonymous'
+
         stat = {
-            'exist': isExist
+            'exist': isExist,
+            'name': name
         }
 
         return JsonResponse(data=stat, safe=False)
