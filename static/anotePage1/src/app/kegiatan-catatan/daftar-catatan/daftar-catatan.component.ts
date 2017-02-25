@@ -1,19 +1,88 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit, Input, OnDestroy} from '@angular/core';
+import {CatatanKegiatanService} from "../../services/catatan-kegiatan.service";
+import {ActivatedRoute, Router, NavigationEnd} from "@angular/router";
+import {KegiatanTertentuService} from "../../services/kegiatan-tertentu.service";
+import {GuardAuthorizeService} from "../../services/guard-authorize.service";
 
 @Component({
     selector: 'an-daftar-catatan',
     templateUrl: './daftar-catatan.component.html',
     styleUrls: ['./daftar-catatan.component.css']
 })
-export class DaftarCatatanComponent implements OnInit {
-    headerText:string;
-    deskripsi:string;
-    @Input() kegiatan_terpilih:any;
+export class DaftarCatatanComponent implements OnInit, OnDestroy {
+    headerText: string;
+    deskripsi: string;
+    private kegiatan_id: any;
+    private sub;
+    private offset: any;
+    private catatan_terkait: any;
+    private kegiatan_terpilih: any;
+    private catatan_next: any;
+    private catatan_previous: any;
+    private catatan_total: any;
 
-    constructor() {}
+    constructor(private catatanService: CatatanKegiatanService,
+                private kegiatanTerpilih: KegiatanTertentuService,
+                private guard: GuardAuthorizeService,
+                private activ: ActivatedRoute,
+                private router: Router) {
+        this.sub = this.router.events.subscribe(
+            (val) => {
+                if (val instanceof NavigationEnd) {
+                    this.kegiatan_id = this.activ.params['_value'].id;
+                    this.getKegiatanTerpilih(this.kegiatan_id);
+
+                    if (!this.guard.canActivate()) {
+                        this.getCatatanTerkait(this.kegiatan_id, this.offset);
+                    }
+                }
+            }
+        );
+    }
 
     ngOnInit() {
         this.headerText = 'INFO';
         this.deskripsi = 'Tekan tautan kegiatan disamping untuk melihat catatan terakhir.';
+        this.offset = 0;
+    }
+
+    ngOnDestroy() {
+        this.sub.unsubscribe();
+    }
+
+    onNewOffset(id, offset) {
+        this.catatanService.getCatatan(id, offset).subscribe(
+            (catatan) => {
+                this.catatan_terkait = catatan['results'];
+                this.catatan_next = catatan['next'];
+                this.catatan_previous = catatan['previous'];
+                this.catatan_total = catatan['count'];
+            },
+            () => {
+                this.catatan_terkait = [];
+            }
+        );
+    }
+
+    getCatatanTerkait(id, offset) {
+        this.catatanService.getCatatan(id, offset).subscribe(
+            (catatan) => {
+                this.catatan_terkait = catatan['results'];
+                this.catatan_next = catatan['next'];
+                this.catatan_previous = catatan['previous'];
+                this.catatan_total = catatan['count'];
+            },
+            () => {
+                this.catatan_terkait = [];
+            }
+        );
+    }
+
+    getKegiatanTerpilih(id) {
+        this.kegiatanTerpilih.getKegiatanTertentu(id).subscribe(
+            (kegiatan) => {
+                this.kegiatan_terpilih = kegiatan;
+            }
+        );
     }
 }
