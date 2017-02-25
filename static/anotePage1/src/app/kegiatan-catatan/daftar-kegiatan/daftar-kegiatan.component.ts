@@ -3,6 +3,7 @@ import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import {KegiatanService} from "../../services/kegiatan.service";
 import {KegiatanTertentuService} from "../../services/kegiatan-tertentu.service";
 import {CatatanKegiatanService} from "../../services/catatan-kegiatan.service";
+import {Router, NavigationEnd} from "@angular/router";
 
 @Component({
     selector: 'an-daftar-kegiatan',
@@ -22,7 +23,15 @@ export class DaftarKegiatanComponent implements OnInit {
 
     constructor(private kegiatanService: KegiatanService,
                 private catatanService: CatatanKegiatanService,
-                private kegiatanTertentu:KegiatanTertentuService) {
+                private kegiatanTertentu:KegiatanTertentuService,
+                private router: Router) {
+        this.router.events.subscribe(
+            (val) => {
+                if (val instanceof NavigationEnd) {
+                    this.getKegiatan(this.offset);
+                }
+            }
+        );
     }
 
     ngOnInit() {
@@ -34,7 +43,7 @@ export class DaftarKegiatanComponent implements OnInit {
     }
 
     getKegiatan(offset) {
-        return this.kegiatanService.getKegiatan(offset).subscribe(
+        this.kegiatanService.getKegiatan(offset).subscribe(
             (kegiatan) => {
                 this.DaftarKegiatan = kegiatan['results'];
                 this.next = kegiatan['next'];
