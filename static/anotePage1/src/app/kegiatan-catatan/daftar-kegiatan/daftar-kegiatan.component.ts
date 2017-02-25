@@ -2,6 +2,7 @@ import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 
 import {KegiatanService} from "../../services/kegiatan.service";
 import {KegiatanTertentuService} from "../../services/kegiatan-tertentu.service";
+import {CatatanKegiatanService} from "../../services/catatan-kegiatan.service";
 
 @Component({
     selector: 'an-daftar-kegiatan',
@@ -11,6 +12,8 @@ import {KegiatanTertentuService} from "../../services/kegiatan-tertentu.service"
 export class DaftarKegiatanComponent implements OnInit {
     DaftarKegiatan: any;
     @Output() kegiatan:any = new EventEmitter<any>();
+    @Output() catatan_terkait:any = new EventEmitter<any>();
+
     next: any;
     previous: any;
     total: number;
@@ -18,6 +21,7 @@ export class DaftarKegiatanComponent implements OnInit {
     private offset: number = 0;
 
     constructor(private kegiatanService: KegiatanService,
+                private catatanService: CatatanKegiatanService,
                 private kegiatanTertentu:KegiatanTertentuService) {
     }
 
@@ -36,7 +40,6 @@ export class DaftarKegiatanComponent implements OnInit {
                 this.next = kegiatan['next'];
                 this.previous = kegiatan['previous'];
                 this.total = kegiatan['count'];
-                // this.prog.done();
             },
             (error) => {
                 console.log(error)
@@ -44,8 +47,20 @@ export class DaftarKegiatanComponent implements OnInit {
         );
     }
 
+    getCatatanTerkait(id, offset) {
+        this.catatanService.getCatatan(id, offset).subscribe(
+            (catatan) => {
+                this.catatan_terkait.emit(catatan['results']);
+            },
+            () => {
+                this.catatan_terkait.emit([]);
+            }
+        );
+    }
+
     onKegiatanClicked(event, id): void {
         event.preventDefault();
+
         this.kegiatanTertentu.getKegiatanTertentu(id).subscribe(
             (kegiatan) => {
                 this.kegiatan.emit(kegiatan);
@@ -54,5 +69,7 @@ export class DaftarKegiatanComponent implements OnInit {
                 console.log(err);
             }
         );
+
+        this.getCatatanTerkait(id, this.offset);
     }
 }
