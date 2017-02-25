@@ -13,14 +13,20 @@ export class HeaderComponent implements OnInit, OnDestroy {
     isAuth: boolean = false;
     isShow: boolean;
     name: string;
-    private sub:any;
+    private sub: any;
 
     constructor(private auth: AuthorizeService,
                 private router: Router) {
         this.sub = this.router.events.subscribe((val) => {
             if (val instanceof NavigationEnd) {
-                if (localStorage.getItem('qwerty')) {this.isAuth = true; this.name = localStorage.getItem('user')}
-                else {this.name = 'Pengaturan'}
+                if (localStorage.getItem('qwerty')) {
+                    this.isAuth = true;
+                    this.name = localStorage.getItem('user');
+                }
+
+                else {
+                    this.name = 'Pengaturan';
+                }
             }
         });
     }
@@ -49,6 +55,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.auth.cobaLogout();
         this.isAuth = false;
         this.isShow = false;
+
         //noinspection JSIgnoredPromiseFromCall
         this.router.navigate(['kegiatan']);
 
