@@ -20,6 +20,7 @@ export class DaftarKegiatanComponent implements OnInit {
     total: number;
 
     private offset: number = 0;
+    private isDisable: boolean = true;
 
     constructor(private kegiatanService: KegiatanService,
                 private catatanService: CatatanKegiatanService,
@@ -49,6 +50,8 @@ export class DaftarKegiatanComponent implements OnInit {
                 this.next = kegiatan['next'];
                 this.previous = kegiatan['previous'];
                 this.total = kegiatan['count'];
+
+                this.isDisable = !(localStorage.getItem('super') && localStorage.getItem('super') == 'true');
             },
             (error) => {
                 console.log(error)
