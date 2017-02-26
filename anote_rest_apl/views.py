@@ -130,5 +130,6 @@ class GetToken(ObtainAuthToken):
 
         return Response({
             'token': token.key,
-            'name': User.objects.get(pk=token.user.pk).get_full_name()
+            'name': User.objects.get(pk=token.user.pk).get_full_name(),
+            'isSuper': User.objects.get(pk=token.user.pk).is_superuser
         })
