@@ -3,7 +3,7 @@
         <div class="float-left">
             {{ kegiatan_terpilih?.nama }}
         </div>
-        <div class="float-right dropdown show" anMunculini>
+        <div class="float-right dropdown" anMunculini *ngIf="isMenuOpsShow">
             <button type="button" class="btn btn-outline-secondary btn-sm"><i class="mdi mdi-dots-vertical"></i>
             </button>
             <div class="dropdown-menu dropdown-menu-right mt-0" aria-labelledby="dropdownMenuButton">
