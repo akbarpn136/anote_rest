@@ -53,7 +53,9 @@ export class DaftarCatatanComponent implements OnInit, OnDestroy {
     }
 
     onNewOffset(id, offset) {
-        this.catatanService.getCatatan(id, offset).subscribe(
+        this.offset += offset;
+
+        this.catatanService.getCatatan(id, this.offset).subscribe(
             (catatan) => {
                 this.catatan_terkait = catatan['results'];
                 this.catatan_next = catatan['next'];

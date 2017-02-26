@@ -40,7 +40,9 @@ export class DaftarKegiatanComponent implements OnInit {
     }
 
     onNewOffset(number): void {
-        this.getKegiatan(this.offset + number);
+        this.offset += number;
+
+        this.getKegiatan(this.offset);
     }
 
     getKegiatan(offset) {

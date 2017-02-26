@@ -1,6 +1,8 @@
-<button type="button" class="btn btn-info btn-lg btn-block mb-3 white-spacing" [disabled]="isDisable">Tambah kegiatan</button>
+<button type="button" class="btn btn-info btn-lg btn-block mb-3 white-spacing" [disabled]="isDisable">Tambah kegiatan
+</button>
 <div class="list-group">
-    <a [routerLink]="['kegiatan', kegiatan.id]" routerLinkActive="active" class="list-group-item list-group-item-action flex-column align-items-start"
+    <a [routerLink]="['kegiatan', kegiatan.id]" routerLinkActive="active"
+       class="list-group-item list-group-item-action flex-column align-items-start"
        *ngFor="let kegiatan of DaftarKegiatan" (click)="onKegiatanClicked($event, kegiatan.id)">
         <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1">{{ kegiatan.nama }}</h5>
@@ -12,13 +14,11 @@
     </a>
 </div>
 
-<div class="mt-2 clearfix">
-    <div class="float-right">
-        <an-pagination [hasNext]="next !== null"
-                       [hasPrev]="previous !== null"
-                       [total]="total"
-                       [range]="15"
-                       (offset)="onNewOffset($event)">
-        </an-pagination>
-    </div>
+<div class="mt-2">
+    <an-pagination [hasNext]="next !== null"
+                   [hasPrev]="previous !== null"
+                   [total]="total"
+                   [range]="15"
+                   (offset)="onNewOffset($event)">
+    </an-pagination>
 </div>
