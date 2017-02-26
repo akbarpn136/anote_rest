@@ -28,6 +28,7 @@ export class AuthorizeService {
 
                 localStorage.setItem('qwerty', body['token']);
                 localStorage.setItem('user', body['name']);
+                localStorage.setItem('super', body['isSuper']);
 
                 return body;
             })
@@ -46,5 +47,6 @@ export class AuthorizeService {
     cobaLogout(): void {
         localStorage.removeItem('qwerty');
         localStorage.removeItem('user');
+        localStorage.removeItem('super');
     }
 }
