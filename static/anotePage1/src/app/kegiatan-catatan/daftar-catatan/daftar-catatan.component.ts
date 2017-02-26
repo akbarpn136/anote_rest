@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, OnDestroy} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {CatatanKegiatanService} from "../../services/catatan-kegiatan.service";
 import {ActivatedRoute, Router, NavigationEnd} from "@angular/router";
 import {KegiatanTertentuService} from "../../services/kegiatan-tertentu.service";
@@ -20,6 +20,7 @@ export class DaftarCatatanComponent implements OnInit, OnDestroy {
     private catatan_next: any;
     private catatan_previous: any;
     private catatan_total: any;
+    private isMenuOpsShow: boolean;
 
     constructor(private catatanService: CatatanKegiatanService,
                 private kegiatanTerpilih: KegiatanTertentuService,
@@ -33,6 +34,7 @@ export class DaftarCatatanComponent implements OnInit, OnDestroy {
                     this.getKegiatanTerpilih(this.kegiatan_id);
 
                     if (!this.guard.canActivate()) {
+                        this.isMenuOpsShow = true;
                         this.getCatatanTerkait(this.kegiatan_id, this.offset);
                     }
                 }
