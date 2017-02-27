@@ -16,6 +16,7 @@ import { LoginComponent } from './login/login.component';
 
 import {GuardAuthorizeService} from "./services/guard-authorize.service";
 import { CatatanComponent } from './kegiatan-catatan/daftar-catatan/catatan.component';
+import { TambahKegiatanComponent } from './kegiatan-catatan/daftar-kegiatan/tambah-kegiatan.component';
 
 @NgModule({
     declarations: [
@@ -28,7 +29,8 @@ import { CatatanComponent } from './kegiatan-catatan/daftar-catatan/catatan.comp
         DaftarCatatanComponent,
         PaginationComponent,
         LoginComponent,
-        CatatanComponent
+        CatatanComponent,
+        TambahKegiatanComponent
     ],
     imports: [
         BrowserModule,
