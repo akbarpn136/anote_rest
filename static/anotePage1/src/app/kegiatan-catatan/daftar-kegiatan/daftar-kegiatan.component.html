@@ -1,4 +1,9 @@
-<an-tambah-kegiatan></an-tambah-kegiatan>
+<button type="button" class="btn btn-info btn-lg btn-block mb-3 white-spacing"
+        [disabled]="isDisable"
+        (click)="onKegiatanTambahClicked()">
+    Tambah kegiatan
+</button>
+<an-tambah-kegiatan [isShow]="isModalShow" (isModalShow)="onModalShowed($event)"></an-tambah-kegiatan>
 
 <div class="list-group">
     <a [routerLink]="['kegiatan', kegiatan.id]" routerLinkActive="active"

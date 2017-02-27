@@ -21,6 +21,7 @@ export class DaftarKegiatanComponent implements OnInit {
 
     private offset: number = 0;
     private isDisable: boolean = true;
+    private isModalShow: boolean = false;
 
     constructor(private kegiatanService: KegiatanService,
                 private catatanService: CatatanKegiatanService,
@@ -85,5 +86,13 @@ export class DaftarKegiatanComponent implements OnInit {
         );
 
         this.getCatatanTerkait(id, this.offset);
+    }
+
+    onKegiatanTambahClicked(): void {
+        this.isModalShow = true;
+    }
+
+    onModalShowed(isShowed): void {
+        this.isModalShow = isShowed;
     }
 }

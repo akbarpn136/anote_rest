@@ -1,15 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 
 @Component({
-  selector: 'an-tambah-kegiatan',
-  templateUrl: './tambah-kegiatan.component.html',
-  styleUrls: ['./tambah-kegiatan.component.css']
+    selector: 'an-tambah-kegiatan',
+    templateUrl: './tambah-kegiatan.component.html',
+    styleUrls: ['./tambah-kegiatan.component.css']
 })
 export class TambahKegiatanComponent implements OnInit {
+    @Input() isShow: boolean = false;
+    @Output() isModalShow = new EventEmitter<boolean>();
 
-  constructor() { }
+    private nama:string;
+    private stkk:string;
+    private kode:string;
+    private tanggal:string;
 
-  ngOnInit() {
-  }
+    constructor() {
+    }
 
+    ngOnInit() {
+    }
+
+    onModalClose() {
+        this.isShow = false;
+        this.isModalShow.emit(false);
+    }
 }
