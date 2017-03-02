@@ -1,6 +1,6 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {CatatanKegiatanService} from "../../services/catatan-kegiatan.service";
-import {ActivatedRoute, Router, NavigationEnd} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 import {KegiatanTertentuService} from "../../services/kegiatan-tertentu.service";
 import {GuardAuthorizeService} from "../../services/guard-authorize.service";
 
@@ -25,18 +25,15 @@ export class DaftarCatatanComponent implements OnInit, OnDestroy {
     constructor(private catatanService: CatatanKegiatanService,
                 private kegiatanTerpilih: KegiatanTertentuService,
                 private guard: GuardAuthorizeService,
-                private activ: ActivatedRoute,
-                private router: Router) {
-        this.sub = this.router.events.subscribe(
+                private activ: ActivatedRoute) {
+        this.sub = this.activ.params.subscribe(
             (val) => {
-                if (val instanceof NavigationEnd) {
-                    this.kegiatan_id = this.activ.params['_value'].id;
-                    this.getKegiatanTerpilih(this.kegiatan_id);
+                this.kegiatan_id = val['id'];
+                this.getKegiatanTerpilih(this.kegiatan_id);
 
-                    if (!this.guard.canActivate()) {
-                        this.isMenuOpsShow = true;
-                        this.getCatatanTerkait(this.kegiatan_id, this.offset);
-                    }
+                if (!this.guard.canActivate()) {
+                    this.isMenuOpsShow = true;
+                    this.getCatatanTerkait(this.kegiatan_id, this.offset);
                 }
             }
         );
