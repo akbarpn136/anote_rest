@@ -1,0 +1,65 @@
+<div class="card card-outline-secondary mb-3">
+    <div class="card-header clearfix">
+        <div class="float-left">
+            <span>Modifikasi Kegiatan</span>
+        </div>
+    </div>
+    <div class="card-block">
+        <form class="mb-4" [formGroup]="kegiatanForm" (submit)="onSimpanKegiatanSubmit(kegiatan_id, kegiatanForm.value)"
+              autocomplete="off" novalidate>
+            <div class="alert alert-danger" role="alert" *ngIf="warnStat">
+                <strong>Oops!</strong> Ada kesalahan!
+                <ul>
+                    <li *ngFor="let k of key">
+                        {{ k }}: {{ message[k] }}
+                    </li>
+                </ul>
+            </div>
+
+            <div class="form-group"
+                 [ngClass]="{'has-success': kegiatanForm.get('nama').status === 'VALID', 'has-danger': kegiatanForm.get('nama').status === 'INVALID' && kegiatanForm.get('nama').dirty}">
+                <label for="inputNama">Nama</label>
+                <input type="text" id="inputNama" class="form-control" placeholder="Nama"
+                       name="nama"
+                       formControlName="nama"
+                       [ngClass]="{'form-control-success': kegiatanForm.get('nama').status === 'VALID', 'form-control-danger': kegiatanForm.get('nama').status === 'INVALID' && kegiatanForm.get('nama').dirty}">
+            </div>
+
+            <div class="form-group"
+                 [ngClass]="{'has-success': kegiatanForm.get('stkk').status === 'VALID', 'has-danger': kegiatanForm.get('stkk').status === 'INVALID' && kegiatanForm.get('stkk').dirty}">
+                <label for="inputSTKK">STKK</label>
+                <input type="text" id="inputSTKK" class="form-control" placeholder="STKK"
+                       name="stkk"
+                       formControlName="stkk"
+                       [ngClass]="{'form-control-success': kegiatanForm.get('stkk').status === 'VALID', 'form-control-danger': kegiatanForm.get('stkk').status === 'INVALID' && kegiatanForm.get('stkk').dirty}">
+            </div>
+
+            <div class="form-group"
+                 [ngClass]="{'has-success': kegiatanForm.get('kode').status === 'VALID', 'has-danger': kegiatanForm.get('kode').status === 'INVALID' && kegiatanForm.get('kode').dirty}">
+                <label for="inputKode">Kode</label>
+                <input type="text" id="inputKode" class="form-control" placeholder="Kode"
+                       name="kode"
+                       formControlName="kode"
+                       [ngClass]="{'form-control-success': kegiatanForm.get('kode').status === 'VALID', 'form-control-danger': kegiatanForm.get('kode').status === 'INVALID' && kegiatanForm.get('kode').dirty}">
+                <small id="kodeHelp" class="form-text text-muted">
+                    Misal: PRG untuk kegiatan Programming
+                </small>
+            </div>
+
+            <div class="form-group"
+                 [ngClass]="{'has-success': kegiatanForm.get('tanggal').status === 'VALID', 'has-danger': kegiatanForm.get('tanggal').status === 'INVALID' && kegiatanForm.get('tanggal').dirty}">
+                <label for="inputTanggal">Tanggal</label>
+                <input type="date" id="inputTanggal" class="form-control"
+                       name="tanggal"
+                       formControlName="tanggal"
+                       [ngClass]="{'form-control-success': kegiatanForm.get('tanggal').status === 'VALID', 'form-control-danger': kegiatanForm.get('tanggal').status === 'INVALID' && kegiatanForm.get('tanggal').dirty}">
+            </div>
+
+            <button class="btn btn-outline-secondary" type="button" (click)="onKembali()">Kembali
+            </button>
+            <button class="btn btn-primary" type="submit"
+                    [disabled]="!kegiatanForm.valid">Simpan
+            </button>
+        </form>
+    </div>
+</div>
