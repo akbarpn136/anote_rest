@@ -1,6 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
+import {ReactiveFormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 
 import {AppComponent} from './app.component';
@@ -12,11 +13,12 @@ import {DaftarKegiatanComponent} from './kegiatan-catatan/daftar-kegiatan/daftar
 import {DaftarCatatanComponent} from './kegiatan-catatan/daftar-catatan/daftar-catatan.component';
 import {PaginationComponent} from './pagination/pagination.component';
 import {route} from './app.route';
-import { LoginComponent } from './login/login.component';
+import {LoginComponent} from './login/login.component';
 
 import {GuardAuthorizeService} from "./services/guard-authorize.service";
-import { CatatanComponent } from './kegiatan-catatan/daftar-catatan/catatan.component';
-import { TambahKegiatanComponent } from './kegiatan-catatan/daftar-kegiatan/tambah-kegiatan.component';
+import {CatatanComponent} from './kegiatan-catatan/daftar-catatan/catatan.component';
+import {TambahKegiatanComponent} from './kegiatan-catatan/daftar-kegiatan/tambah-kegiatan.component';
+import {ModifKegiatanComponent} from './kegiatan-catatan/daftar-kegiatan/modif-kegiatan.component';
 
 @NgModule({
     declarations: [
@@ -30,11 +32,13 @@ import { TambahKegiatanComponent } from './kegiatan-catatan/daftar-kegiatan/tamb
         PaginationComponent,
         LoginComponent,
         CatatanComponent,
-        TambahKegiatanComponent
+        TambahKegiatanComponent,
+        ModifKegiatanComponent
     ],
     imports: [
         BrowserModule,
         FormsModule,
+        ReactiveFormsModule,
         HttpModule,
         route
     ],
