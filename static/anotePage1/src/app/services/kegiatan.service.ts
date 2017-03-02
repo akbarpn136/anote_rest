@@ -3,6 +3,7 @@ import {Http, Response, Headers, RequestOptions, URLSearchParams} from '@angular
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import {GuardAuthorizeService} from "./guard-authorize.service";
+import {Observable} from "rxjs";
 
 @Injectable()
 export class KegiatanService {
@@ -39,4 +40,24 @@ export class KegiatanService {
             });
     }
 
+    tambahKegiatan(data) {
+        let headers = new Headers({'Content-Type': 'application/json'});
+
+        headers.set('Authorization', `token ${localStorage.getItem('qwerty')}`);
+
+        let options = new RequestOptions({headers: headers});
+
+        return this.http.post(this.KEGIATAN_URL, data, options)
+            .map((res: Response) => {
+                return res.json();
+            })
+            .catch((err: Response | any) => {
+                if (err instanceof Response) {
+                    return Observable.throw(err.json());
+                }
+                else {
+                    return err.message;
+                }
+            });
+    }
 }
