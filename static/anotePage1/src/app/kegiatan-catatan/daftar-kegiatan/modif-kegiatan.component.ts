@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {FormBuilder, Validators, FormGroup} from "@angular/forms";
 import {Location} from "@angular/common";
 import {KegiatanTertentuService} from "../../services/kegiatan-tertentu.service";
@@ -20,6 +20,7 @@ export class ModifKegiatanComponent implements OnInit {
     constructor(private fb: FormBuilder,
                 private loc: Location,
                 private active: ActivatedRoute,
+                private router: Router,
                 private kegTerp: KegiatanTertentuService,
                 private kegiatan: KegiatanService) {
         this.active.params.subscribe((params) => {
@@ -49,12 +50,30 @@ export class ModifKegiatanComponent implements OnInit {
 
     onSimpanKegiatanSubmit(kegiatan_id, simpan_data) {
         this.kegiatan.simpanKegiatan(kegiatan_id, simpan_data).subscribe(
-            () => {this.onKembali();},
+            () => {
+                this.onKembali();
+            },
             (err) => {
                 this.warnStat = true;
                 this.key = Object.keys(err);
                 this.message = err;
             }
         );
+    }
+
+    onHapusKegiatan(kegiatan_id) {
+        if (window.confirm('Hapus kegiatan ini?')) {
+            this.kegiatan.hapusKegiatan(kegiatan_id).subscribe(
+                () => {
+                    //noinspection JSIgnoredPromiseFromCall
+                    this.router.navigate(['']);
+                },
+                (err) => {
+                    this.warnStat = true;
+                    this.key = Object.keys(err);
+                    this.message = err;
+                }
+            );
+        }
     }
 }
