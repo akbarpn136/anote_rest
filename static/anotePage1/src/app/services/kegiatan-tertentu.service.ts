@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers, RequestOptions, Response} from "@angular/http";
+import {Observable} from "rxjs";
 
 @Injectable()
 export class KegiatanTertentuService {
@@ -19,7 +20,7 @@ export class KegiatanTertentuService {
             })
             .catch((err: Response | any) => {
                 if (err instanceof Response) {
-                    return err.json();
+                    return Observable.throw(err.json());
                 }
                 else {
                     return err.message;
