@@ -3,6 +3,11 @@
         <div class="float-left">
             <span>Modifikasi Kegiatan</span>
         </div>
+        <div class="float-right">
+            <button class="btn btn-danger btn-sm" type="button" title="HAPUS" (click)="onHapusKegiatan(kegiatan_id)">
+                <i class="mdi mdi-delete-forever"></i>
+            </button>
+        </div>
     </div>
     <div class="card-block">
         <form class="mb-4" [formGroup]="kegiatanForm" (submit)="onSimpanKegiatanSubmit(kegiatan_id, kegiatanForm.value)"
