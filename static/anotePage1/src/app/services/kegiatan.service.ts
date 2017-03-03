@@ -81,4 +81,25 @@ export class KegiatanService {
                 }
             });
     }
+
+    hapusKegiatan(kegiatan_id,) {
+        let headers = new Headers({'Content-Type': 'application/json'});
+
+        headers.set('Authorization', `token ${localStorage.getItem('qwerty')}`);
+
+        let options = new RequestOptions({headers: headers});
+
+        return this.http.delete(`${this.KEGIATAN_URL}${kegiatan_id}/`, options)
+            .map((res: Response) => {
+                return res.json();
+            })
+            .catch((err: Response | any) => {
+                if (err instanceof Response) {
+                    return Observable.throw(err.json());
+                }
+                else {
+                    return err.message;
+                }
+            });
+    }
 }
