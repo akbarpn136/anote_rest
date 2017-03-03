@@ -19,6 +19,8 @@ import {GuardAuthorizeService} from "./services/guard-authorize.service";
 import {CatatanComponent} from './kegiatan-catatan/daftar-catatan/catatan.component';
 import {TambahKegiatanComponent} from './kegiatan-catatan/daftar-kegiatan/tambah-kegiatan.component';
 import {ModifKegiatanComponent} from './kegiatan-catatan/daftar-kegiatan/modif-kegiatan.component';
+import { AnggotaKegiatanComponent } from './kegiatan-catatan/anggota-kegiatan/anggota-kegiatan.component';
+import { PersonilPipe } from './an-pipe/personil.pipe';
 
 @NgModule({
     declarations: [
@@ -33,7 +35,9 @@ import {ModifKegiatanComponent} from './kegiatan-catatan/daftar-kegiatan/modif-k
         LoginComponent,
         CatatanComponent,
         TambahKegiatanComponent,
-        ModifKegiatanComponent
+        ModifKegiatanComponent,
+        AnggotaKegiatanComponent,
+        PersonilPipe
     ],
     imports: [
         BrowserModule,
