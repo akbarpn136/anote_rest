@@ -1,0 +1,23 @@
+<div class="card mb-3">
+    <div class="card-block">
+        <h3>Anggota kegiatan</h3>
+        <table class="table">
+            <thead class="thead-inverse">
+            <tr>
+                <th>#</th>
+                <th>Nama</th>
+                <th>Jabatan</th>
+                <th>Kode</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let agt of anggota_kegiatan; let nomor = index">
+                <th scope="row">{{ nomor+1 }}</th>
+                <td>{{ agt.id }}</td>
+                <td>{{ agt.jabatan }}</td>
+                <td>{{ agt.kode_jabatan }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
