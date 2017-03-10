@@ -1,7 +1,12 @@
-.white-spacing{
+.white-spacing {
     white-space: normal;
 }
 
-.word-wrapping{
+.word-wrapping {
     word-wrap: break-word;
+}
+
+.list-group-item.active {
+    background-color: #666A73;
+    border-color: #636c72;
 }
