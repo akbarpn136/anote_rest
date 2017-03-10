@@ -23,7 +23,6 @@ export class AnggotaKegiatanComponent implements OnInit {
             this.kegiatan_id = +val['id'];
             this.anggota.ambilAnggota(this.kegiatan_id).subscribe(
                 (anggota) => {
-                    console.log(anggota);
                     this.anggota_kegiatan = anggota['results'];
                     this.anggota_next = anggota['next'];
                     this.anggota_previous = anggota['previous'];
