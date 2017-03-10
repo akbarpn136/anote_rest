@@ -13,6 +13,11 @@ class DaftarMemberKegiatan(generics.ListCreateAPIView):
     serializer_class = serializers.MemberSerializer
     permission_classes = (IsSuperUser,)
 
+    def get_queryset(self):
+        q = models.MemberKegiatan.objects.filter(kegiatan=self.kwargs['kegiatan_id'])
+
+        return q
+
     def perform_create(self, serializer):
         keg = get_object_or_404(Kegiatan, pk=self.kwargs['kegiatan_id'])
 
