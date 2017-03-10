@@ -1,13 +1,20 @@
 <div class="card mb-3">
     <div class="card-block">
-        <h3>Anggota kegiatan</h3>
+        <div class="clearfix">
+            <h3 class="mb-4 float-left">Anggota Kegiatan</h3>
+            <button type="button" class="btn btn-success float-right">
+                Tambah
+            </button>
+        </div>
+
         <table class="table">
-            <thead class="thead-inverse">
+            <thead class="thead-default">
             <tr>
                 <th>#</th>
                 <th>Nama</th>
                 <th>Jabatan</th>
                 <th>Kode</th>
+                <th class="text-center">Opsi</th>
             </tr>
             </thead>
             <tbody>
@@ -16,8 +23,18 @@
                 <td>{{ agt.personil_fullname }}</td>
                 <td>{{ agt.jabatan }}</td>
                 <td>{{ agt.kode_jabatan }}</td>
+                <td class="text-center">
+                    <a href="" class="mr-3">Ubah</a>
+                    <a href="">Hapus</a>
+                </td>
             </tr>
             </tbody>
         </table>
+        <an-pagination [hasNext]="anggota_next !== null"
+                       [hasPrev]="anggota_previous !== null"
+                       [total]="anggota_count"
+                       [range]="15"
+                       (offset)="onNewOffset($event)">
+        </an-pagination>
     </div>
 </div>
