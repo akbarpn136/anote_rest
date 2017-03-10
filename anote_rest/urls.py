@@ -21,4 +21,5 @@ urlpatterns = [
     url(r'^api_1/', include('rest_framework.urls', namespace='api_admin')),
     url(r'^api_1/kegiatan/', include('anote_rest_apl.urls', namespace='api_1_kegiatan')),
     url(r'^api_1/butir/', include('anote_rest_butir.urls', namespace='api_1_butir')),
+    url(r'^api_1/profil/', include('anote_rest_profil.urls', namespace='api_1_profil')),
 ]
