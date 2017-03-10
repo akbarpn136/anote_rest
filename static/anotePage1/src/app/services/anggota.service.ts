@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Http, RequestOptions, Headers, Response} from "@angular/http";
+import {Http, RequestOptions, Headers, Response, URLSearchParams} from "@angular/http";
 import {Observable} from "rxjs";
 
 @Injectable()
@@ -11,12 +11,16 @@ export class AnggotaService {
     constructor(private http: Http) {
     }
 
-    ambilAnggota(kegiatan_id) {
+    ambilAnggota(kegiatan_id, offset) {
         this.qwerty = localStorage.getItem('qwerty');
         let headers = new Headers({'Content-Type': 'application/json'});
+        let params = new URLSearchParams();
+
+        // params.set('limit', limit);
+        params.set('offset', offset);
         headers.set('Authorization', `token ${this.qwerty}`);
 
-        let options = new RequestOptions({headers: headers});
+        let options = new RequestOptions({headers: headers, search: params});
 
         return this.http.get(`${this.ANGGOTA_KEGIATAN_URL}${kegiatan_id}/anggota/`, options)
             .map((res: Response) => {
