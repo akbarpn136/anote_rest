@@ -5,6 +5,7 @@ from django.db import models
 class Kegiatan(models.Model):
     nama = models.CharField(max_length=255)
     stkk = models.CharField(max_length=255)
+    manual = models.CharField(max_length=500, blank=True)
     kode = models.CharField(max_length=100)
     tanggal = models.DateField()
 

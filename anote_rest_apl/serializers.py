@@ -10,6 +10,7 @@ class KegiatanSerializer(serializers.ModelSerializer):
             'id',
             'nama',
             'stkk',
+            'manual',
             'kode',
             'tanggal',
         )
