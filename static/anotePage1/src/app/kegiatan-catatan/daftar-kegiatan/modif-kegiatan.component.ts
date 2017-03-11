@@ -39,6 +39,7 @@ export class ModifKegiatanComponent implements OnInit {
         this.kegiatanForm = this.fb.group({
             nama: this.fb.control(data.nama, Validators.compose([Validators.required])),
             stkk: this.fb.control(data.stkk, Validators.compose([Validators.required])),
+            manual: this.fb.control(data.manual),
             kode: this.fb.control(data.kode, Validators.compose([Validators.required])),
             tanggal: this.fb.control(data.tanggal, Validators.compose([Validators.required])),
         });
