@@ -18,9 +18,10 @@ class MemberKegiatan(models.Model):
     personil = models.ForeignKey('auth.User', related_name='personil')
     jabatan = models.CharField(max_length=2, choices=OPSI_JABATAN, default='ES')
     kode_jabatan = models.CharField(max_length=10, verbose_name='Kode Jabatan')
+    order = models.IntegerField(verbose_name='Urutan', default=0)
 
     class Meta:
-        ordering = ('kode_jabatan',)
+        ordering = ('order', 'kode_jabatan',)
         verbose_name_plural = 'Member Kegiatan'
 
     def __str__(self):
