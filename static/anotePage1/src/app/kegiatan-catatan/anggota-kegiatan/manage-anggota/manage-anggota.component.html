@@ -1,0 +1,83 @@
+<div class="modal fade"
+     [ngClass]="{'show': isShow}"
+     [ngStyle]="{'display': isShow ? 'block' : 'None'}" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Kegiatan Baru</h5>
+            </div>
+            <form novalidate #authForm="ngForm" (submit)="onTambahKegiatanSubmit()" autocomplete="off">
+                <div class="modal-body">
+                    <div class="alert alert-danger" role="alert" *ngIf="warnStat">
+                        <strong>Oops!</strong> Ada kesalahan!
+                        <ul>
+                            <li *ngFor="let k of key">
+                                {{ k }}: {{ message[k] }}
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="form-group"
+                         [ngClass]="{'has-success': nm.valid, 'has-danger': nm.invalid && nm.dirty}">
+                        <label for="inputNama">Nama</label>
+                        <input type="text" id="inputNama" class="form-control" placeholder="Nama" required=""
+                               #nm="ngModel"
+                               name="nama"
+                               [(ngModel)]="nama"
+                               [ngClass]="{'form-control-success': nm.valid, 'form-control-danger': nm.invalid && nm.dirty}">
+                    </div>
+
+                    <div class="form-group"
+                         [ngClass]="{'has-success': sk.valid, 'has-danger': sk.invalid && sk.dirty}">
+                        <label for="inputSTKK">STKK</label>
+                        <input type="text" id="inputSTKK" class="form-control" placeholder="STKK" required=""
+                               #sk="ngModel"
+                               name="stkk"
+                               [(ngModel)]="stkk"
+                               [ngClass]="{'form-control-success': sk.valid, 'form-control-danger': sk.invalid && sk.dirty}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputMANUAL">Program Manual</label>
+                        <input type="text" id="inputMANUAL" class="form-control" placeholder="Program Manual"
+                               name="manual"
+                               [(ngModel)]="manual">
+                    </div>
+
+                    <div class="form-group"
+                         [ngClass]="{'has-success': kd.valid, 'has-danger': kd.invalid && kd.dirty}">
+                        <label for="inputKode">Kode</label>
+                        <input type="text" id="inputKode" class="form-control" placeholder="Kode" required=""
+                               #kd="ngModel"
+                               name="kode"
+                               [(ngModel)]="kode"
+                               [ngClass]="{'form-control-success': kd.valid, 'form-control-danger': kd.invalid && kd.dirty}">
+                        <small id="kodeHelp" class="form-text text-muted">
+                            Misal: PRG untuk kegiatan Programming
+                        </small>
+                    </div>
+
+                    <div class="form-group"
+                         [ngClass]="{'has-success': tg.valid, 'has-danger': tg.invalid && tg.dirty}">
+                        <label for="inputTanggal">Tanggal</label>
+                        <input type="date" id="inputTanggal" class="form-control" required=""
+                               #tg="ngModel"
+                               name="tanggal"
+                               [(ngModel)]="tanggal"
+                               [ngClass]="{'form-control-success': tg.valid, 'form-control-danger': tg.invalid && tg.dirty}">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" (click)="onModalClose()">Tutup</button>
+                    <button class="btn btn-primary" type="submit"
+                            [disabled]="!authForm.form.valid">Simpan
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal-backdrop fade"
+     *ngIf="isShow"
+     [ngClass]="{'show': isShow}"></div>
