@@ -13,6 +13,7 @@ export class TambahKegiatanComponent implements OnInit {
 
     private nama: string;
     private stkk: string;
+    private manual: string;
     private kode: string;
     private tanggal: string;
     private warnStat: boolean;
@@ -34,6 +35,7 @@ export class TambahKegiatanComponent implements OnInit {
         let data = {
             'nama': this.nama,
             'stkk': this.stkk,
+            'manual': this.manual,
             'kode': this.kode,
             'tanggal': this.tanggal,
         };
