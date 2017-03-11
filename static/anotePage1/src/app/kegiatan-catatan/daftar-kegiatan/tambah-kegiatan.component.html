@@ -37,6 +37,13 @@
                                [ngClass]="{'form-control-success': sk.valid, 'form-control-danger': sk.invalid && sk.dirty}">
                     </div>
 
+                    <div class="form-group">
+                        <label for="inputMANUAL">Program Manual</label>
+                        <input type="text" id="inputMANUAL" class="form-control" placeholder="Program Manual"
+                               name="manual"
+                               [(ngModel)]="manual">
+                    </div>
+
                     <div class="form-group"
                          [ngClass]="{'has-success': kd.valid, 'has-danger': kd.invalid && kd.dirty}">
                         <label for="inputKode">Kode</label>
