@@ -40,6 +40,15 @@
             </div>
 
             <div class="form-group"
+                 [ngClass]="{'has-success': kegiatanForm.get('manual').status === 'VALID', 'has-danger': kegiatanForm.get('manual').status === 'INVALID' && kegiatanForm.get('manual').dirty}">
+                <label for="inputSTKK">Program Manual</label>
+                <input type="text" id="inputManual" class="form-control" placeholder="Program Manual"
+                       name="manual"
+                       formControlName="manual"
+                       [ngClass]="{'form-control-success': kegiatanForm.get('manual').status === 'VALID', 'form-control-danger': kegiatanForm.get('manual').status === 'INVALID' && kegiatanForm.get('manual').dirty}">
+            </div>
+
+            <div class="form-group"
                  [ngClass]="{'has-success': kegiatanForm.get('kode').status === 'VALID', 'has-danger': kegiatanForm.get('kode').status === 'INVALID' && kegiatanForm.get('kode').dirty}">
                 <label for="inputKode">Kode</label>
                 <input type="text" id="inputKode" class="form-control" placeholder="Kode"
