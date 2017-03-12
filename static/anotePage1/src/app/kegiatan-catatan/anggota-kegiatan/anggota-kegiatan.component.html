@@ -2,7 +2,8 @@
     <div class="card-block">
         <div class="clearfix">
             <h3 class="mb-4 float-left">Anggota Kegiatan</h3>
-            <button type="button" class="btn btn-success float-right">
+            <button type="button" class="btn btn-success float-right"
+                    (click)="onTambahAnggota()">
                 Tambah
             </button>
         </div>
@@ -36,5 +37,7 @@
                        [range]="15"
                        (offset)="onNewOffset($event)">
         </an-pagination>
+        <an-manage-anggota [isShow]="isShow"
+                           (sendIsShow)="receiveIsShow($event)" (sendReloadAnggota)="receiveReloadAnggota($event)"></an-manage-anggota>
     </div>
 </div>
