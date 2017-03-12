@@ -2,18 +2,18 @@ from django.db import models
 
 from anote_rest_apl.models import Kegiatan
 
+OPSI_JABATAN = (
+    ('TS', 'Technical Staff'),
+    ('ES', 'Engineering Staff'),
+    ('LD', 'Leader'),
+    ('GL', 'Group Leader'),
+    ('PM', 'Program Manager'),
+    ('CE', 'Chief Engineering'),
+)
+
 
 # Create your models here.
 class MemberKegiatan(models.Model):
-    OPSI_JABATAN = (
-        ('TS', 'Technical Staff'),
-        ('ES', 'Engineering Staff'),
-        ('LD', 'Leader'),
-        ('GL', 'Group Leader'),
-        ('PM', 'Program Manager'),
-        ('CE', 'Chief Engineering'),
-    )
-
     kegiatan = models.ForeignKey(Kegiatan, related_name='anggota_kegiatan', on_delete=models.CASCADE)
     personil = models.ForeignKey('auth.User', related_name='personil')
     jabatan = models.CharField(max_length=2, choices=OPSI_JABATAN, default='ES')
