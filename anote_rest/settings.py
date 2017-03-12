@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'anote_rest_apl.apps.AnoteRestAplConfig',
     'anote_rest_butir.apps.AnoteRestButirConfig',
     'anote_rest_member.apps.AnoteRestMemberConfig',
+    'anote_rest_profil.apps.AnoteRestProfilConfig',
+    'anote_rest_utiliti.apps.AnoteRestUtilitiConfig',
 ]
 
 MIDDLEWARE = [
