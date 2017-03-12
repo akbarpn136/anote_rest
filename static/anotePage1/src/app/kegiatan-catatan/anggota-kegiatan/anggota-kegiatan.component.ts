@@ -18,6 +18,8 @@ export class AnggotaKegiatanComponent implements OnInit {
     messages: any;
     offset: number = 0;
 
+    isShow: boolean;
+
     constructor(private active: ActivatedRoute,
                 private anggota: AnggotaService) {
         this.active.parent.params.subscribe(val => {
@@ -47,5 +49,19 @@ export class AnggotaKegiatanComponent implements OnInit {
                 this.key = Object.keys(this.messages);
             }
         );
+    }
+
+    onTambahAnggota() {
+        this.isShow = true;
+    }
+
+    receiveIsShow(e) {
+        this.isShow = e;
+    }
+
+    receiveReloadAnggota(e) {
+        if (e === true) {
+            this.ambilAnggota(this.kegiatan_id, this.offset);
+        }
     }
 }
