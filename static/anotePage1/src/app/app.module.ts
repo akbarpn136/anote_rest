@@ -20,6 +20,7 @@ import {CatatanComponent} from './kegiatan-catatan/daftar-catatan/catatan.compon
 import {TambahKegiatanComponent} from './kegiatan-catatan/daftar-kegiatan/tambah-kegiatan.component';
 import {ModifKegiatanComponent} from './kegiatan-catatan/daftar-kegiatan/modif-kegiatan.component';
 import { AnggotaKegiatanComponent } from './kegiatan-catatan/anggota-kegiatan/anggota-kegiatan.component';
+import { ManageAnggotaComponent } from './kegiatan-catatan/anggota-kegiatan/manage-anggota/manage-anggota.component';
 
 @NgModule({
     declarations: [
@@ -35,7 +36,8 @@ import { AnggotaKegiatanComponent } from './kegiatan-catatan/anggota-kegiatan/an
         CatatanComponent,
         TambahKegiatanComponent,
         ModifKegiatanComponent,
-        AnggotaKegiatanComponent
+        AnggotaKegiatanComponent,
+        ManageAnggotaComponent
     ],
     imports: [
         BrowserModule,
