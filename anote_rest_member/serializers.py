@@ -16,7 +16,8 @@ class MemberSerializer(serializers.ModelSerializer):
             'personil_fullname',
             'personil',
             'jabatan',
-            'kode_jabatan'
+            'kode_jabatan',
+            'order'
         )
 
     @staticmethod
