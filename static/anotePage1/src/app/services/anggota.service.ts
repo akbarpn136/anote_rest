@@ -37,6 +37,29 @@ export class AnggotaService {
             });
     }
 
+    ambilAnggotaTertentu(kegiatan_id, anggota_id) {
+        this.qwerty = localStorage.getItem('qwerty');
+        let headers = new Headers({'Content-Type': 'application/json'});
+
+        headers.set('Authorization', `token ${this.qwerty}`);
+
+        let options = new RequestOptions({headers: headers});
+
+        return this.http.get(`${this.ANGGOTA_KEGIATAN_URL}${kegiatan_id}/anggota/${anggota_id}/`, options)
+            .map((res: Response) => {
+                return res.json();
+            })
+            .catch((err: Response | any) => {
+                if (err instanceof Response) {
+                    return Observable.throw(err.json());
+                }
+
+                else {
+                    return err.message;
+                }
+            });
+    }
+
     tambahAnggota(kegiatan_id, data) {
         this.qwerty = localStorage.getItem('qwerty');
         let headers = new Headers({'Content-Type': 'application/json'});
@@ -46,6 +69,52 @@ export class AnggotaService {
         let options = new RequestOptions({headers: headers});
 
         return this.http.post(`${this.ANGGOTA_KEGIATAN_URL}${kegiatan_id}/anggota/`, data, options)
+            .map((res: Response) => {
+                return res.json();
+            })
+            .catch((err: Response | any) => {
+                if (err instanceof Response) {
+                    return Observable.throw(err.json());
+                }
+
+                else {
+                    return err.message;
+                }
+            });
+    }
+
+    ubahAnggota(kegiatan_id, anggota_id, data) {
+        this.qwerty = localStorage.getItem('qwerty');
+        let headers = new Headers({'Content-Type': 'application/json'});
+
+        headers.set('Authorization', `token ${this.qwerty}`);
+
+        let options = new RequestOptions({headers: headers});
+
+        return this.http.put(`${this.ANGGOTA_KEGIATAN_URL}${kegiatan_id}/anggota/${anggota_id}/`, data, options)
+            .map((res: Response) => {
+                return res.json();
+            })
+            .catch((err: Response | any) => {
+                if (err instanceof Response) {
+                    return Observable.throw(err.json());
+                }
+
+                else {
+                    return err.message;
+                }
+            });
+    }
+
+    hapusAnggota(kegiatan_id, anggota_id) {
+        this.qwerty = localStorage.getItem('qwerty');
+        let headers = new Headers({'Content-Type': 'application/json'});
+
+        headers.set('Authorization', `token ${this.qwerty}`);
+
+        let options = new RequestOptions({headers: headers});
+
+        return this.http.delete(`${this.ANGGOTA_KEGIATAN_URL}${kegiatan_id}/anggota/${anggota_id}/`, options)
             .map((res: Response) => {
                 return res.json();
             })
