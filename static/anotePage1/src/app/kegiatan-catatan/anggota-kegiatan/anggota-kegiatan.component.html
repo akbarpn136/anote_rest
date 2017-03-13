@@ -2,10 +2,7 @@
     <div class="card-block">
         <div class="clearfix">
             <h3 class="mb-4 float-left">Anggota Kegiatan</h3>
-            <button type="button" class="btn btn-success float-right"
-                    (click)="onTambahAnggota()">
-                Tambah
-            </button>
+            <a [routerLink]="['tambah']" class="btn btn-success float-right">Tambah</a>
         </div>
 
         <table class="table">
@@ -25,8 +22,8 @@
                 <td>{{ agt.jabatan }}</td>
                 <td>{{ agt.kode_jabatan }}</td>
                 <td class="text-center">
-                    <a href="" class="mr-3">Ubah</a>
-                    <a href="">Hapus</a>
+                    <a [routerLink]="[agt.id, 'ubah']" class="mr-3">Ubah</a>
+                    <a href="#" (click)="onHapusAnggota($event, kegiatan_id, agt.id)">Hapus</a>
                 </td>
             </tr>
             </tbody>
@@ -37,7 +34,5 @@
                        [range]="15"
                        (offset)="onNewOffset($event)">
         </an-pagination>
-        <an-manage-anggota [isShow]="isShow"
-                           (sendIsShow)="receiveIsShow($event)" (sendReloadAnggota)="receiveReloadAnggota($event)"></an-manage-anggota>
     </div>
 </div>
