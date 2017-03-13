@@ -1,10 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {Router, NavigationEnd} from "@angular/router";
+import {AnggotaService} from "../../services/anggota.service";
 
 @Component({
     selector: 'an-catatan',
     templateUrl: './catatan.component.html',
-    styleUrls: ['./catatan.component.css']
+    styleUrls: ['./catatan.component.css'],
+    providers: [AnggotaService]
 })
 export class CatatanComponent implements OnInit {
     isShow:boolean;
