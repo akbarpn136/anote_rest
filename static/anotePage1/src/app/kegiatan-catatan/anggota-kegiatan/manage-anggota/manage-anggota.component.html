@@ -1,81 +1,70 @@
-<div class="modal fade"
-     [ngClass]="{'show': isShow}"
-     [ngStyle]="{'display': isShow ? 'block' : 'None'}" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Kegiatan Baru</h5>
+<div class="card mb-3">
+    <div class="card-block">
+        <h3 class="mb-2">{{ sub_title }} Anggota</h3>
+        <form novalidate [formGroup]="anggotaForm"
+              (submit)="onAnggotaSubmit(kegiatan_id, anggota_id, anggotaForm.value)" autocomplete="off">
+
+            <div class="alert alert-danger" role="alert" *ngIf="warnStat">
+                <strong>Oops!</strong> Ada kesalahan!
+                <ul>
+                    <li *ngFor="let k of key">
+                        {{ k }}: {{ message[k] }}
+                    </li>
+                </ul>
             </div>
-            <form novalidate [formGroup]="anggotaForm" (submit)="onAnggotaSubmit(kegiatan_id, anggotaForm.value)" autocomplete="off">
-                <div class="modal-body">
-                    <div class="alert alert-danger" role="alert" *ngIf="warnStat">
-                        <strong>Oops!</strong> Ada kesalahan!
-                        <ul>
-                            <li *ngFor="let k of key">
-                                {{ k }}: {{ message[k] }}
-                            </li>
-                        </ul>
-                    </div>
 
-                    <div class="form-group">
-                        <input type="hidden" id="inputKegiatan" class="form-control"
-                               name="kegiatan"
-                               formControlName="kegiatan" [(ngModel)]="kegiatan_id">
-                    </div>
+            <div class="form-group">
+                <input type="hidden" id="inputKegiatan" class="form-control"
+                       name="kegiatan"
+                       formControlName="kegiatan" [(ngModel)]="kegiatan_id">
+            </div>
 
-                    <div class="form-group"
-                         [ngClass]="{'has-success': anggotaForm.get('personil').status === 'VALID', 'has-danger': anggotaForm.get('personil').status === 'INVALID' && anggotaForm.get('personil').dirty}">
-                        <label for="inputKode">Personil</label>
-                        <select name="personil"
-                                id="personil"
-                                formControlName="personil"
-                                class="form-control"
-                                [ngClass]="{'form-control-success': anggotaForm.get('personil').status === 'VALID', 'form-control-danger': anggotaForm.get('personil').status === 'INVALID' && anggotaForm.get('personil').dirty}">
-                            <option *ngFor="let u of user" value="{{ u.pk }}">{{ u.nama }}</option>
-                        </select>
-                    </div>
+            <div class="form-group"
+                 [ngClass]="{'has-success': anggotaForm.get('personil').status === 'VALID', 'has-danger': anggotaForm.get('personil').status === 'INVALID' && anggotaForm.get('personil').dirty}">
+                <label for="inputPersonil">Personil</label>
+                <select name="personil"
+                        id="inputPersonil"
+                        formControlName="personil"
+                        class="form-control"
+                        [ngClass]="{'form-control-success': anggotaForm.get('personil').status === 'VALID', 'form-control-danger': anggotaForm.get('personil').status === 'INVALID' && anggotaForm.get('personil').dirty}">
+                    <option *ngFor="let u of user" value="{{ u.pk }}">{{ u.nama }}</option>
+                </select>
+            </div>
 
-                    <div class="form-group"
-                         [ngClass]="{'has-success': anggotaForm.get('jabatan').status === 'VALID', 'has-danger': anggotaForm.get('jabatan').status === 'INVALID' && anggotaForm.get('jabatan').dirty}">
-                        <label for="inputKode">Jabatan</label>
-                        <select name="jabatan"
-                                id="jabatan"
-                                formControlName="jabatan"
-                                class="form-control"
-                                [ngClass]="{'form-control-success': anggotaForm.get('jabatan').status === 'VALID', 'form-control-danger': anggotaForm.get('jabatan').status === 'INVALID' && anggotaForm.get('jabatan').dirty}">
-                            <option *ngFor="let j of jabatan" value="{{ j.simbol }}">{{ j.nama }}</option>
-                        </select>
-                    </div>
+            <div class="form-group"
+                 [ngClass]="{'has-success': anggotaForm.get('jabatan').status === 'VALID', 'has-danger': anggotaForm.get('jabatan').status === 'INVALID' && anggotaForm.get('jabatan').dirty}">
+                <label for="inputJabatan">Jabatan</label>
+                <select name="jabatan"
+                        id="inputJabatan"
+                        formControlName="jabatan"
+                        class="form-control"
+                        [ngClass]="{'form-control-success': anggotaForm.get('jabatan').status === 'VALID', 'form-control-danger': anggotaForm.get('jabatan').status === 'INVALID' && anggotaForm.get('jabatan').dirty}">
+                    <option *ngFor="let j of jabatan" value="{{ j.simbol }}">{{ j.nama }}</option>
+                </select>
+            </div>
 
-                    <div class="form-group"
-                         [ngClass]="{'has-success': anggotaForm.get('kode_jabatan').status === 'VALID', 'has-danger': anggotaForm.get('kode_jabatan').status === 'INVALID' && anggotaForm.get('kode_jabatan').dirty}">
-                        <label for="inputKode">Kode</label>
-                        <input type="text" id="inputKodeJabatan" class="form-control" placeholder="Kode"
-                               name="kode_jabatan"
-                               formControlName="kode_jabatan"
-                               [ngClass]="{'form-control-success': anggotaForm.get('kode_jabatan').status === 'VALID', 'form-control-danger': anggotaForm.get('kode_jabatan').status === 'INVALID' && anggotaForm.get('kode_jabatan').dirty}">
-                    </div>
+            <div class="form-group"
+                 [ngClass]="{'has-success': anggotaForm.get('kode_jabatan').status === 'VALID', 'has-danger': anggotaForm.get('kode_jabatan').status === 'INVALID' && anggotaForm.get('kode_jabatan').dirty}">
+                <label for="inputKodeJabatan">Kode</label>
+                <input type="text" id="inputKodeJabatan" class="form-control" placeholder="Kode"
+                       name="kode_jabatan"
+                       formControlName="kode_jabatan"
+                       [ngClass]="{'form-control-success': anggotaForm.get('kode_jabatan').status === 'VALID', 'form-control-danger': anggotaForm.get('kode_jabatan').status === 'INVALID' && anggotaForm.get('kode_jabatan').dirty}">
+            </div>
 
-                    <div class="form-group"
-                         [ngClass]="{'has-success': anggotaForm.get('order').status === 'VALID', 'has-danger': anggotaForm.get('order').status === 'INVALID' && anggotaForm.get('order').dirty}">
-                        <label for="inputKode">Urutan</label>
-                        <input type="text" id="inputOrder" class="form-control" placeholder="1, 2, 3, atau, ..."
-                               name="order"
-                               formControlName="order"
-                               [ngClass]="{'form-control-success': anggotaForm.get('order').status === 'VALID', 'form-control-danger': anggotaForm.get('order').status === 'INVALID' && anggotaForm.get('order').dirty}">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" (click)="onModalClose()">Tutup</button>
-                    <button class="btn btn-primary" type="submit"
-                            [disabled]="!anggotaForm.valid">Simpan
-                    </button>
-                </div>
-            </form>
-        </div>
+            <div class="form-group"
+                 [ngClass]="{'has-success': anggotaForm.get('order').status === 'VALID', 'has-danger': anggotaForm.get('order').status === 'INVALID' && anggotaForm.get('order').dirty}">
+                <label for="inputOrder">Urutan</label>
+                <input type="number" id="inputOrder" class="form-control" placeholder="1, 2, 3, atau, ..."
+                       name="order"
+                       formControlName="order"
+                       [ngClass]="{'form-control-success': anggotaForm.get('order').status === 'VALID', 'form-control-danger': anggotaForm.get('order').status === 'INVALID' && anggotaForm.get('order').dirty}">
+            </div>
+
+            <button type="button" class="btn btn-secondary" (click)="onKembali()">Kembali</button>
+            <button class="btn btn-primary" type="submit"
+                    [disabled]="!anggotaForm.valid">Simpan
+            </button>
+        </form>
     </div>
 </div>
-
-<div class="modal-backdrop fade"
-     *ngIf="isShow"
-     [ngClass]="{'show': isShow}"></div>
