@@ -18,8 +18,6 @@ export class AnggotaKegiatanComponent implements OnInit {
     messages: any;
     offset: number = 0;
 
-    isShow: boolean;
-
     constructor(private active: ActivatedRoute,
                 private anggota: AnggotaService) {
         this.active.parent.params.subscribe(val => {
@@ -51,17 +49,15 @@ export class AnggotaKegiatanComponent implements OnInit {
         );
     }
 
-    onTambahAnggota() {
-        this.isShow = true;
-    }
-
-    receiveIsShow(e) {
-        this.isShow = e;
-    }
-
-    receiveReloadAnggota(e) {
-        if (e === true) {
-            this.ambilAnggota(this.kegiatan_id, this.offset);
+    onHapusAnggota(e, kegiatan_id, anggota_id) {
+        if (window.confirm('Apakah Anda yakin?')) {
+            this.anggota.hapusAnggota(kegiatan_id, anggota_id).subscribe(
+                () => {
+                    this.ambilAnggota(this.kegiatan_id, this.offset);
+                }
+            );
         }
+
+        e.preventDefault();
     }
 }
