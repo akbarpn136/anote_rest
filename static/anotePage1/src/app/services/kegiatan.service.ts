@@ -82,7 +82,7 @@ export class KegiatanService {
             });
     }
 
-    hapusKegiatan(kegiatan_id,) {
+    hapusKegiatan(kegiatan_id) {
         let headers = new Headers({'Content-Type': 'application/json'});
 
         headers.set('Authorization', `token ${localStorage.getItem('qwerty')}`);
